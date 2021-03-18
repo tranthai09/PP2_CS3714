@@ -9,6 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PP2_CS3714">
+
+        <receiver
+            android:name=".MusicCompletionReceiver"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <service
+            android:name=".MusicService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

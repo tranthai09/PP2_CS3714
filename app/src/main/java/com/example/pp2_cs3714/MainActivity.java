@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     public static final String INITIALIZE_STATUS = "initialization status";
     public static final String MUSIC_PLAYING = "music playing";
 
+    TextView music;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +44,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         prev.setOnClickListener(this);
         next.setOnClickListener(this);
 
+        music = (TextView) findViewById(R.id.tv_songTitle);
+
         if(savedInstanceState != null){
             isInitialized = savedInstanceState.getBoolean(INITIALIZE_STATUS);
-            //music.setText(savedInstanceState.getString(MUSIC_PLAYING));
+            music.setText(savedInstanceState.getString(MUSIC_PLAYING));
         }
 
         startMusicServiceIntent = new Intent(this, MusicService.class);
@@ -88,6 +93,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         registerReceiver(musicCompletionReceiver, new IntentFilter(MusicService.COMPLETE_INTENT));
     }
 
+    public void updateName(String musicName) {
+
+        music.setText(musicName);
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -103,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(INITIALIZE_STATUS, isInitialized);
-        //outState.putString(MUSIC_PLAYING, music.getText().toString());
+        outState.putString(MUSIC_PLAYING, music.getText().toString());
         super.onSaveInstanceState(outState);
     }
 
