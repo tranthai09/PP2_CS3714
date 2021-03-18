@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-public class MusicCompletionRecevier extends BroadcastReceiver {
+public class MusicCompletionReceiver extends BroadcastReceiver {
 
     MainActivity mainActivity;
 
@@ -19,6 +19,6 @@ public class MusicCompletionRecevier extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String musicName= intent.getStringExtra(MusicService.MUSICNAME);
-        mainActivity.updateName(musicName);
+        //mainActivity.updateName(musicName);
     }
 }
